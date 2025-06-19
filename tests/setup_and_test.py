@@ -10,7 +10,7 @@ from pathlib import Path
 # Add src to path so we can import lemonmeringue
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from lemonmeringue import quick_generate, Voices
+from lemonmeringue import LemonSliceClient, Voices
 
 
 async def quick_test():
@@ -28,13 +28,13 @@ async def quick_test():
     print(f"🔑 API Key: {api_key[:8]}...")
     
     try:
-        response = await quick_generate(
-            api_key=api_key,
-            img_url="https://6ammc3n5zzf5ljnz.public.blob.vercel-storage.com/inf2-defaults/cool_man-AZGi3AIjUGN47rGxA8xdHMBGr1Qqha.png",
-            voice_id=Voices.ANDREA,
-            text="Hello from LemonMeringue! This is a quick test.",
-            expressiveness=0.8
-        )
+        async with LemonSliceClient(api_key) as client:
+            response = await client.quick_generate_text(
+                img_url="https://6ammc3n5zzf5ljnz.public.blob.vercel-storage.com/inf2-defaults/cool_man-AZGi3AIjUGN47rGxA8xdHMBGr1Qqha.png",
+                voice_id=Voices.ANDREA,
+                text="Hello from LemonMeringue! This is a quick test.",
+                expressiveness=0.8
+            )
         
         print(f"✅ Success! Video generated: {response.video_url}")
         print(f"⏱️  Processing time: {response.processing_time:.1f} seconds")

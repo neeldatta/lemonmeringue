@@ -336,40 +336,52 @@ class LemonSliceClient:
         
         return results
 
-
-# Convenience function for simple use cases
-async def quick_generate(
-    api_key: str,
-    img_url: str,
-    audio_url: str = None,
-    voice_id: str = None,
-    text: str = None,
-    **kwargs
-) -> GenerationResponse:
-    """
-    Quick generation function for simple use cases
-    
-    Args:
-        api_key: LemonSlice API key
-        img_url: Image URL
-        audio_url: Audio URL (optional)
-        voice_id: Voice ID for TTS (optional)
-        text: Text to speak (optional)
-        **kwargs: Additional generation parameters
-        
-    Returns:
-        GenerationResponse with video URL
-    """
-    
-    async with LemonSliceClient(api_key) as client:
+    async def quick_generate_text(
+        self,
+        img_url: str,
+        voice_id: str,
+        text: str,
+        **kwargs
+    ) -> GenerationResponse:
+        """
+        Quickly generate a video from text and voice.
+        Args:
+            img_url: Image URL
+            voice_id: Voice ID for TTS
+            text: Text to speak
+            **kwargs: Additional generation parameters
+        Returns:
+            GenerationResponse with video URL
+        """
         request = GenerationRequest(
             img_url=img_url,
-            audio_url=audio_url,
             voice_id=voice_id,
             text=text,
             **kwargs
         )
-        return await client.generate_video(request)
+        return await self.generate_video(request)
+
+    async def quick_generate_audio(
+        self,
+        img_url: str,
+        audio_url: str,
+        **kwargs
+    ) -> GenerationResponse:
+        """
+        Quickly generate a video from an audio file.
+        Args:
+            img_url: Image URL
+            audio_url: Audio file URL
+            **kwargs: Additional generation parameters
+        Returns:
+            GenerationResponse with video URL
+        """
+        request = GenerationRequest(
+            img_url=img_url,
+            audio_url=audio_url,
+            **kwargs
+        )
+        return await self.generate_video(request)
 
 
 # Available voices as constants for easy reference

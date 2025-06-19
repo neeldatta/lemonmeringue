@@ -14,7 +14,6 @@ from lemonmeringue import (
     GenerationResponse,
     RetryConfig,
     Voices,
-    quick_generate,
     APIError,
     ValidationError
 )
@@ -156,22 +155,17 @@ async def test_quick_generate(results: TestResults):
     """Test 4: Quick generate convenience function"""
     try:
         start_time = time.time()
-        
-        response = await quick_generate(
-            api_key=API_KEY,
-            img_url=SAMPLE_IMAGE_URL,
-            voice_id=Voices.EMMA,
-            text="Testing the quick generate function!",
-            expressiveness=0.9
-        )
-        
+        async with LemonSliceClient(API_KEY) as client:
+            response = await client.quick_generate_text(
+                img_url=SAMPLE_IMAGE_URL,
+                voice_id=Voices.EMMA,
+                text="Testing the quick generate function!",
+                expressiveness=0.9
+            )
         elapsed = time.time() - start_time
-        
         assert response.status.value == "completed"
         assert response.video_url is not None
-        
         results.add_pass("Quick Generate", f"Completed in {elapsed:.1f}s")
-        
     except Exception as e:
         results.add_fail("Quick Generate", str(e))
 

@@ -13,8 +13,7 @@ from .client import (
     APIError,
     ValidationError,
     GenerationStatus,
-    Voices,
-    quick_generate
+    Voices
 )
 
 __version__ = "0.1.0"
@@ -30,6 +29,5 @@ __all__ = [
     "APIError", 
     "ValidationError",
     "GenerationStatus",
-    "Voices",
-    "quick_generate"
+    "Voices"
 ]

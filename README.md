@@ -134,16 +134,24 @@ asyncio.run(main())
 
 ```python
 import asyncio
-from lemonmeringue import quick_generate, Voices
+from lemonmeringue import LemonSliceClient, Voices
 
 async def main():
-    result = await quick_generate(
-        api_key="your_api_key",
-        img_url="https://example.com/image.jpg",
-        voice_id=Voices.ANDREA,
-        text="Hello world!"
-    )
-    print(f"Video: {result.video_url}")
+    async with LemonSliceClient("your_api_key") as client:
+        # Quick generate from text and voice
+        result = await client.quick_generate_text(
+            img_url="https://example.com/image.jpg",
+            voice_id=Voices.ANDREA,
+            text="Hello world!"
+        )
+        print(f"Video (text+voice): {result.video_url}")
+
+        # Quick generate from audio file
+        result2 = await client.quick_generate_audio(
+            img_url="https://example.com/image.jpg",
+            audio_url="https://example.com/audio.mp3"
+        )
+        print(f"Video (audio): {result2.video_url}")
 
 asyncio.run(main())
 ```
