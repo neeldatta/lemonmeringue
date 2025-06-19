@@ -1,6 +1,6 @@
 # 🍋 LemonMeringue
 
-> **v0.1.2** — **Upcoming in a future LemonMeringue release:** Support for Instagram!
+> **v0.1.2**
 
 A fluffy layer of reliability and ease-of-use on top of the LemonSlice API
 
