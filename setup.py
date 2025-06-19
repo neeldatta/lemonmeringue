@@ -16,7 +16,7 @@ with open(os.path.join(current_dir, "requirements.txt"), "r", encoding="utf-8") 
 
 setup(
     name="lemonmeringue",
-    version="0.1.2",
+    version="0.1.3",
     author="Neel Datta",
     author_email="neeldatta@berkeley.edu",
     description="Enhanced Python SDK for LemonSlice API with retry logic and better error handling",

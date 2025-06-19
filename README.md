@@ -1,6 +1,6 @@
 # 🍋 LemonMeringue
 
-> **v0.1.2**
+> **v0.1.3**
 
 A fluffy layer of reliability and ease-of-use on top of the LemonSlice API
 
