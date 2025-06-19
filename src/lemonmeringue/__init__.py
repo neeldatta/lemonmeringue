@@ -16,9 +16,9 @@ from .client import (
     Voices
 )
 
-__version__ = "0.1.0"
-__author__ = "Your Name"
-__email__ = "your.email@example.com"
+__version__ = "0.1.1"
+__author__ = "Neel Datta"
+__email__ = "neeldatta@berkeley.edu"
 
 __all__ = [
     "LemonSliceClient",

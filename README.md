@@ -1,6 +1,6 @@
 # 🍋 LemonMeringue
 
-> **Upcoming in a future LemonMeringue release:** Support for inputting local files!
+> **v0.1.1** — **Upcoming in a future LemonMeringue release:** Support for Instagram!
 
 A fluffy layer of reliability and ease-of-use on top of the LemonSlice API
 
