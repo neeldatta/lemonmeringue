@@ -1,35 +1,27 @@
-# 🍋 LemonMeringue
+# LemonMeringue
 
-> **v0.1.3**
+> **v0.1.4**
 
 A fluffy layer of reliability and ease-of-use on top of the LemonSlice API
 
 Enhanced Python SDK for the [LemonSlice API](https://lemonslice.com) with automatic retry logic, progress tracking, better error handling, and batch processing.
 
 [![PyPI version](https://badge.fury.io/py/lemonmeringue.svg)](https://badge.fury.io/py/lemonmeringue)
-[![Python Support](https://img.shields.io/pypi/pyversions/lemonmeringue.svg)](https://pypi.org/project/lemonmeringue/)
+[![Python Support](https://img.shields.io/pypi/pyversions/lemonmeringue.svg)](https://pypi.org/project/lemonmeringue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Why LemonMeringue?](#-why-lemonmeringue)
-- [Key Features](#-key-features)
-- [Quick Start](#-quick-start)
-  - [Installation](#installation)
-  - [Basic Usage](#basic-usage)
-  - [Quick Generate](#quick-generate-one-liner)
-- [Testing Guide](#-testing-guide)
-- [Advanced Usage](#-advanced-usage)
-  - [Batch Processing](#batch-processing)
-  - [Custom Retry Configuration](#custom-retry-configuration)
-  - [Input Validation](#input-validation)
-- [Available Voices](#-available-voices)
-- [Configuration Options](#️-configuration-options)
-  - [Generation Parameters](#generation-parameters)
-  - [Client Configuration](#client-configuration)
-- [Error Handling](#-error-handling)
+- [Why LemonMeringue?](#why-lemonmeringue)
+- [Key Features](#key-features)
+- [Quick Start](#quick-start)
+- [Testing Guide](#testing-guide)
+- [Advanced Usage](#advanced-usage)
+- [Available Voices](#available-voices)
+- [Configuration Options](#configuration-options)
+- [Error Handling](#error-handling)
 
-## 🎯 Why LemonMeringue?
+## Why LemonMeringue?
 
 **Before (Raw LemonSlice API):**
 
@@ -57,7 +49,7 @@ while True:
 
 **After (LemonMeringue):**
 
-````python
+```python
 # 3 lines of code - everything handled automatically
 from lemonmeringue import LemonSliceClient, Voices
 
@@ -68,53 +60,25 @@ async def main():
             voice_id=Voices.ANDREA,
             text="Hello world!"
         )
-        print(f"✅ Video ready: {result.video_url}")
+        print(f"Video ready: {result.video_url}")
+```
 
-# ... existing code ...
-### 🚀 **Convenience Functions**
+## Key Features
 
-- **Problem**: Setting up clients and making requests is verbose
-- **Solution**: `client.quick_generate_text()` and `client.quick_generate_audio()` for simple use cases, context managers for complex ones
+- **Automatic Retry Logic**: Exponential backoff retries with configurable settings
+- **Progress Tracking**: Real-time progress callbacks with status updates
+- **Input Validation**: Pre-validation with clear error messages before API calls
+- **Batch Processing**: Concurrent batch processing with automatic queue management
+- **Convenience Functions**: Simple one-liners for common use cases
+- **Type Hints & IDE Support**: Full type hints for auto-completion and error detection
 
-## ✨ Key Features
-
-### 🔄 **Automatic Retry Logic**
-
-- **Problem**: LemonSlice API sometimes has temporary issues (500 errors, rate limits)
-- **Solution**: Exponential backoff retries with configurable settings
-
-### 📊 **Progress Tracking**
-
-- **Problem**: Users don't know how long generation takes or current status
-- **Solution**: Real-time progress callbacks with status updates
-
-### ✅ **Input Validation**
-
-- **Problem**: Invalid parameters cause confusing API errors
-- **Solution**: Pre-validation with clear error messages before API calls
-
-### 📦 **Batch Processing**
-
-- **Problem**: Generating 10 videos = 10 separate API calls + manual management
-- **Solution**: Concurrent batch processing with automatic queue management
-
-### 🚀 **Convenience Functions**
-
-- **Problem**: Setting up clients and making requests is verbose
-- **Solution**: `client.quick_generate_text()` and `client.quick_generate_audio()` for simple use cases, context managers for complex ones
-
-### 🎯 **Type Hints & IDE Support**
-
-- **Problem**: Users don't know what parameters are available
-- **Solution**: Full type hints for auto-completion and error detection
-
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
 ```bash
 pip install lemonmeringue
-````
+```
 
 ### Basic Usage
 
@@ -135,8 +99,8 @@ async def main():
             on_progress=lambda r: print(f"Status: {r.status.value}")
         )
 
-        print(f"✅ Video generated: {response.video_url}")
-        print(f"⏱️  Processing time: {response.processing_time:.1f}s")
+        print(f"Video generated: {response.video_url}")
+        print(f"Processing time: {response.processing_time:.1f}s")
 
 asyncio.run(main())
 ```
@@ -167,83 +131,42 @@ async def main():
 asyncio.run(main())
 ```
 
-## 🧪 Testing Guide
+## Testing Guide
 
-> **Note**: As of June 19, 2025, running the complete test suite costs approximately $0.60 in LemonSlice API credits.
+**Note**: As of June 19, 2025, running the complete test suite costs approximately $0.60 in LemonSlice API credits.
 
-### 1. Set Up Your Environment
+### Running Tests
 
 ```bash
-# In your lemonmeringue repo directory
+# Set up environment
 export LEMONSLICE_API_KEY="your_actual_api_key_here"
-```
 
-### 2. Run All Tests
-
-```bash
+# Run all tests
 python setup_and_test.py
-```
 
-### 3. Run Comprehensive Feature Tests
-
-```bash
+# Run comprehensive feature tests
 python test_all_features.py
-```
 
-### 4. Quick Test Only
-
-```bash
+# Quick test only
 python setup_and_test.py test-only
 ```
 
----
+### Test Coverage
 
-### What Gets Tested
+- Basic Functionality (video generation)
+- Progress Tracking (real-time status)
+- Input Validation (invalid parameters)
+- Quick Generate (convenience function)
+- Batch Processing (multiple videos)
+- Retry Logic (error handling)
+- Different Voices (voice options)
+- Error Handling (exceptions)
+- URL Validation (input checking)
+- Parameter Testing (models/resolutions)
 
-- ✅ Basic Functionality (video generation)
-- ✅ Progress Tracking (real-time status)
-- ✅ Input Validation (invalid parameters)
-- ✅ Quick Generate (convenience function)
-- ✅ Batch Processing (multiple videos)
-- ✅ Retry Logic (error handling)
-- ✅ Different Voices (voice options)
-- ✅ Error Handling (exceptions)
-- ✅ URL Validation (input checking)
-- ✅ Parameter Testing (models/resolutions)
-
----
-
-### Example Output
-
-```bash
-🧪 Starting LemonMeringue comprehensive test suite...
-🔑 Using API key: sk_1234...
-🖼️  Test image: https://6ammc3n5zzf5ljnz...
-
-🧪 Test 1/10: Basic Functionality
-✅ Basic Functionality: Generated in 45.2s
-
-🧪 Test 2/10: Progress Tracking
-   📊 Progress update: processing
-   📊 Progress update: completed
-✅ Progress Tracking: 2 status updates received
-
-...
-
-📊 Test Summary: 10/10 passed
-🎉 All tests passed! LemonMeringue is working perfectly!
-```
-
----
-
-**Ready to Test?**  
-Just set your API key and run `python setup_and_test.py` to verify all features with the real LemonSlice API. No file uploads needed—public image URLs are used.
-
-## 🔧 Advanced Usage
+## Advanced Usage
 
 ### Batch Processing
-
-Generate multiple videos concurrently:
 
 ```python
 requests = [
@@ -260,9 +183,9 @@ responses = await client.generate_batch(
 
 for i, response in enumerate(responses):
     if isinstance(response, Exception):
-        print(f"❌ Video {i+1} failed: {response}")
+        print(f"Video {i+1} failed: {response}")
     else:
-        print(f"✅ Video {i+1}: {response.video_url}")
+        print(f"Video {i+1}: {response.video_url}")
 ```
 
 ### Custom Retry Configuration
@@ -283,23 +206,7 @@ client = LemonSliceClient(
 )
 ```
 
-### Input Validation
-
-```python
-# Validate URLs before generation
-validation = await client.validate_inputs(
-    img_url="https://example.com/image.jpg",
-    audio_url="https://example.com/audio.mp3"
-)
-
-if validation['img_url_valid'] and validation.get('audio_url_valid', True):
-    # Proceed with generation
-    pass
-else:
-    print("❌ Invalid input URLs")
-```
-
-## 🎭 Available Voices
+## Available Voices
 
 ```python
 from lemonmeringue import Voices
@@ -310,16 +217,9 @@ Voices.RUSSO     # Middle-aged man, Australian, narrator
 Voices.EMMA      # Young woman, German
 Voices.GIOVANNI  # Young man, Italian, deep
 Voices.RUSSELL   # Middle-aged man, British, dramatic
-
-# Use in requests
-request = GenerationRequest(
-    img_url="image.jpg",
-    voice_id=Voices.ANDREA,
-    text="Your text here"
-)
 ```
 
-## 🛠️ Configuration Options
+## Configuration Options
 
 ### Generation Parameters
 
@@ -348,7 +248,7 @@ client = LemonSliceClient(
 )
 ```
 
-## 🔍 Error Handling
+## Error Handling
 
 ```python
 from lemonmeringue import APIError, ValidationError
@@ -356,40 +256,28 @@ from lemonmeringue import APIError, ValidationError
 try:
     response = await client.generate_video(request)
 except ValidationError as e:
-    print(f"❌ Invalid input: {e}")
+    print(f"Invalid input: {e}")
 except APIError as e:
-    print(f"❌ API error ({e.status_code}): {e}")
+    print(f"API error ({e.status_code}): {e}")
     if e.response:
         print(f"Response details: {e.response}")
 except Exception as e:
-    print(f"❌ Unexpected error: {e}")
+    print(f"Unexpected error: {e}")
 ```
 
-## 📊 Response Information
-
-```python
-response = await client.generate_video(request)
-
-print(f"Job ID: {response.job_id}")
-print(f"Status: {response.status.value}")
-print(f"Video URL: {response.video_url}")
-print(f"Processing time: {response.processing_time:.1f}s")
-print(f"Created at: {response.created_at}")
-```
-
-## 🔗 API Compatibility
+## API Compatibility
 
 This SDK wraps the [LemonSlice API v2](https://lemonslice.com/developer). You'll need a LemonSlice API key to use this package.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 🔗 Links
+## Links
 
-- **PyPI**: https://pypi.org/project/lemonmeringue/
-- **GitHub**: https://github.com/neeldatta/lemonmeringue
-- **LemonSlice API**: https://lemonslice.com/developer
+- [PyPI Package](https://pypi.org/project/lemonmeringue/)
+- [GitHub Repository](https://github.com/neeldatta/lemonmeringue)
+- [LemonSlice API Documentation](https://lemonslice.com/developer)
 
 ---
 
