@@ -1,6 +1,8 @@
 # 🍋 LemonMeringue
 
-> A fluffy layer of reliability and ease-of-use on top of the LemonSlice API
+> **Upcoming in a future LemonMeringue release:** Support for inputting local files!
+
+A fluffy layer of reliability and ease-of-use on top of the LemonSlice API
 
 Enhanced Python SDK for the [LemonSlice API](https://lemonslice.com) with automatic retry logic, progress tracking, better error handling, and batch processing.
 
@@ -16,6 +18,7 @@ Enhanced Python SDK for the [LemonSlice API](https://lemonslice.com) with automa
   - [Installation](#installation)
   - [Basic Usage](#basic-usage)
   - [Quick Generate](#quick-generate-one-liner)
+- [Testing Guide](#-testing-guide)
 - [Advanced Usage](#-advanced-usage)
   - [Batch Processing](#batch-processing)
   - [Custom Retry Configuration](#custom-retry-configuration)
@@ -78,11 +81,6 @@ print(f"✅ Video ready: {result.video_url}")
 
 - **Problem**: Invalid parameters cause confusing API errors
 - **Solution**: Pre-validation with clear error messages before API calls
-
-### 🛡️ **Better Error Messages**
-
-- **Problem**: Raw HTTP errors like "422 Unprocessable Entity" are cryptic
-- **Solution**: Clear, specific error messages explaining what went wrong
 
 ### 📦 **Batch Processing**
 
@@ -149,6 +147,78 @@ async def main():
 
 asyncio.run(main())
 ```
+
+## 🧪 Testing Guide
+
+> **Note**: As of June 19, 2025, running the complete test suite costs approximately $0.60 in LemonSlice API credits.
+
+### 1. Set Up Your Environment
+
+```bash
+# In your lemonmeringue repo directory
+export LEMONSLICE_API_KEY="your_actual_api_key_here"
+```
+
+### 2. Run All Tests
+
+```bash
+python setup_and_test.py
+```
+
+### 3. Run Comprehensive Feature Tests
+
+```bash
+python test_all_features.py
+```
+
+### 4. Quick Test Only
+
+```bash
+python setup_and_test.py test-only
+```
+
+---
+
+### What Gets Tested
+
+- ✅ Basic Functionality (video generation)
+- ✅ Progress Tracking (real-time status)
+- ✅ Input Validation (invalid parameters)
+- ✅ Quick Generate (convenience function)
+- ✅ Batch Processing (multiple videos)
+- ✅ Retry Logic (error handling)
+- ✅ Different Voices (voice options)
+- ✅ Error Handling (exceptions)
+- ✅ URL Validation (input checking)
+- ✅ Parameter Testing (models/resolutions)
+
+---
+
+### Example Output
+
+```bash
+🧪 Starting LemonMeringue comprehensive test suite...
+🔑 Using API key: sk_1234...
+🖼️  Test image: https://6ammc3n5zzf5ljnz...
+
+🧪 Test 1/10: Basic Functionality
+✅ Basic Functionality: Generated in 45.2s
+
+🧪 Test 2/10: Progress Tracking
+   📊 Progress update: processing
+   📊 Progress update: completed
+✅ Progress Tracking: 2 status updates received
+
+...
+
+📊 Test Summary: 10/10 passed
+🎉 All tests passed! LemonMeringue is working perfectly!
+```
+
+---
+
+**Ready to Test?**  
+Just set your API key and run `python setup_and_test.py` to verify all features with the real LemonSlice API. No file uploads needed—public image URLs are used.
 
 ## 🔧 Advanced Usage
 

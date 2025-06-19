@@ -160,11 +160,33 @@ class LemonSliceClient:
                     )
                 
                 if not response.ok:
-                    raise APIError(
-                        response_data.get('error', 'Unknown API error'),
-                        status_code=response.status,
-                        response=response_data
-                    )
+                    # Provide more specific error messages based on status code
+                    if response.status == 404:
+                        raise APIError(
+                            f"Resource not found: {endpoint}",
+                            status_code=response.status,
+                            response=response_data
+                        )
+                    elif response.status == 401:
+                        raise APIError(
+                            "Invalid API key or unauthorized access",
+                            status_code=response.status,
+                            response=response_data
+                        )
+                    elif response.status == 429:
+                        raise APIError(
+                            "Rate limit exceeded",
+                            status_code=response.status,
+                            response=response_data
+                        )
+                    else:
+                        # Use error message from API if available, otherwise fallback
+                        error_msg = response_data.get('error', f"API error (status {response.status})")
+                        raise APIError(
+                            error_msg,
+                            status_code=response.status,
+                            response=response_data
+                        )
                 
                 return response_data
                 
