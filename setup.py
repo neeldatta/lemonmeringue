@@ -16,13 +16,13 @@ with open(os.path.join(current_dir, "requirements.txt"), "r", encoding="utf-8") 
 
 setup(
     name="lemonmeringue",
-    version="0.1.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    version="0.1.1",
+    author="Neel Datta",
+    author_email="neeldatta@berkeley.edu",
     description="Enhanced Python SDK for LemonSlice API with retry logic and better error handling",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/lemonmeringue",
+    url="https://github.com/neeldatta/lemonmeringue",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[
@@ -62,8 +62,8 @@ setup(
         ],
     },
     project_urls={
-        "Bug Reports": "https://github.com/yourusername/lemonmeringue/issues",
-        "Source": "https://github.com/yourusername/lemonmeringue",
-        "Documentation": "https://github.com/yourusername/lemonmeringue#readme",
+        "Bug Reports": "https://github.com/neeldatta/lemonmeringue/issues",
+        "Source": "https://github.com/neeldatta/lemonmeringue",
+        "Documentation": "https://github.com/neeldatta/lemonmeringue#readme",
     },
 )
