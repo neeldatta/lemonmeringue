@@ -1,6 +1,6 @@
 # 🍋 LemonMeringue
 
-> **v0.1.1** — **Upcoming in a future LemonMeringue release:** Support for Instagram!
+> **v0.1.2** — **Upcoming in a future LemonMeringue release:** Support for Instagram!
 
 A fluffy layer of reliability and ease-of-use on top of the LemonSlice API
 
@@ -57,13 +57,24 @@ while True:
 
 **After (LemonMeringue):**
 
-```python
+````python
 # 3 lines of code - everything handled automatically
-from lemonmeringue import quick_generate, Voices
+from lemonmeringue import LemonSliceClient, Voices
 
-result = await quick_generate(api_key, img_url, Voices.ANDREA, "Hello world!")
-print(f"✅ Video ready: {result.video_url}")
-```
+async def main():
+    async with LemonSliceClient(api_key) as client:
+        result = await client.quick_generate_text(
+            img_url=img_url,
+            voice_id=Voices.ANDREA,
+            text="Hello world!"
+        )
+        print(f"✅ Video ready: {result.video_url}")
+
+# ... existing code ...
+### 🚀 **Convenience Functions**
+
+- **Problem**: Setting up clients and making requests is verbose
+- **Solution**: `client.quick_generate_text()` and `client.quick_generate_audio()` for simple use cases, context managers for complex ones
 
 ## ✨ Key Features
 
@@ -90,7 +101,7 @@ print(f"✅ Video ready: {result.video_url}")
 ### 🚀 **Convenience Functions**
 
 - **Problem**: Setting up clients and making requests is verbose
-- **Solution**: `quick_generate()` for simple use cases, context managers for complex ones
+- **Solution**: `client.quick_generate_text()` and `client.quick_generate_audio()` for simple use cases, context managers for complex ones
 
 ### 🎯 **Type Hints & IDE Support**
 
@@ -103,7 +114,7 @@ print(f"✅ Video ready: {result.video_url}")
 
 ```bash
 pip install lemonmeringue
-```
+````
 
 ### Basic Usage
 
